@@ -1,0 +1,43 @@
+This is just all theory, we have to work slowly and not get ahead of ourselves, but it is good to have some kind of vision in mind.
+
+Damage theory: 
+We could implement different types of damage i.e. physical and magic damage. Enemies have armor (blocks physical) and magic resist (blocks magic) which allows for tower damage diversity and enemy defensive options. Each enemy can have strengths and weaknesses same with towers. You would not want a tower that does a lot of physical damage when there are towers with high armor, a mix of damage is needed which invites the player to build many types of towers for their different needs, or implement buffs on their towers to allow them to deal with different types of enemies.
+
+Enemy Ideas:
+- = easier to implement
++ = harder to implement
+
+- normal enemy: med hp, med MS,
+- Light enemy: low hp, high ms
+- Heavy enemy: high hp, low ms
++ Smoke bomb enemy: drops a cloud of smoke that veils enemies that pass through it
++ Rally enemy: rallies enemies around it buffing MS and defensive stats
++ Ghost enemy: can only be targeted by certain types of towers, think BTD camo
++ Cripple enemy: can cripple/lower dmg/disable towers for some time
+- Juggernaut: low MS, High HP, very high armor, low MR
+- Mana Fiend: low MS, high HP, very high MR, low armor
++ Spellthief: immune to magic damage, med hp, low armor, heals for % of magic dmg dealt to it.
++ Commander: spawns small enemies every few seconds around it. 
+- Duplicator: when killed, spawns multiple weaker enemies on the path, high hp and resists, low MS
++ Archmage: gives different buffs to enemies around it every few seconds, i.e. heals, ms buff, defensive buff
++ Saboteur: lowers the level of an ally tower for a period of time/whole round/until killed
++ Hopper: can jump to different parts of the track
+
+With towers we need to counter the different enemies and their strengths. Some towers do only physical, some only magic. Some may have mixed damage, others could have pierce damage which could ignore armor/MR. 
+
+DOT= damage over time
+AOE= area of effect
+
+Tower Ideas:
+- basic tower: think BTD dart monkey, physical damage
+- magic tower: dart monkey but magic damage
++ cannon tower: AOE damage
++ wizard tower: clash of clans wizard tower, heavy magic AOE
+- sniper: single target heavy physical pierce damage. Low fire speed
+- stun/slow tower: slows/stuns enemies hit
+- Beam tower: single target scaling damage for amount of time targeting that enemy. Resets damage on new target. High range
+- Blight tower: marks an enemy/enemies for death, reducing their armor/MR/HP
++ poison tower: damage over time to poisoned enemies.
+- Scout: reveals shrouded/camo enemies +| grants allies sight of shrouded enemies
++ flamethrower tower: self explanatory, could also have DOT burn damage
+- frost tower: slows enemies in radius/releases pulse that slows enemies every few seconds/ very low damage
