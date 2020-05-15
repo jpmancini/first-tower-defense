@@ -29,16 +29,24 @@ public class LevelManager : MonoBehaviour
     private void CreateLevel()
     {
 
-      for (int y = 0; y < 5; y++) //y position
-      {
-        for (int x = 0; x < 5; x++) //x position
-        {
-          //Create a new tile
-          GameObject newTile = Instantiate(tile);
+      Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
 
-          //Sets the position of the new tile
-          newTile.transform.position = new Vector3(TileSize*x, TileSize*y, 0);
+      for (int y = 0; y < 10; y++) //y position
+      {
+        for (int x = 0; x < 10; x++) //x position
+        {
+          PlaceTile(x,y,worldStart);
         }
       }
+    }
+
+    //Function that places each tile at position x,y
+    private void PlaceTile(int x, int y, Vector3 worldStart)
+    {
+      //Create a new tile
+      GameObject newTile = Instantiate(tile);
+
+      //Sets the position of the new tile
+      newTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0);
     }
 }
