@@ -6,12 +6,12 @@ public class LevelManager : MonoBehaviour
 {
     //Creating tile object
     [SerializeField]
-    private GameObject tile;
+    private GameObject[] tilePrefabs;
 
     //Makes TileSize accessable from anywhere
     public float TileSize
     {
-      get { return  tile.GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
+      get { return  tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
     }
 
     // Start is called before the first frame update
@@ -29,6 +29,11 @@ public class LevelManager : MonoBehaviour
     private void CreateLevel()
     {
 
+      string[] mapData = new string[]
+      {
+        
+      }
+
       Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
 
       for (int y = 0; y < 10; y++) //y position
@@ -44,7 +49,7 @@ public class LevelManager : MonoBehaviour
     private void PlaceTile(int x, int y, Vector3 worldStart)
     {
       //Create a new tile
-      GameObject newTile = Instantiate(tile);
+      GameObject newTile = Instantiate(tilePrefabs[0]);
 
       //Sets the position of the new tile
       newTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0);
