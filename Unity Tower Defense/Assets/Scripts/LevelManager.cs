@@ -31,25 +31,33 @@ public class LevelManager : MonoBehaviour
 
       string[] mapData = new string[]
       {
-        
-      }
+        "0000", "1111", "2222", "3333", "4444", "5555"
+      };
+
+      int mapX = mapData[0].ToCharArray().Length;
+      int mapY = mapData.Length;
 
       Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
 
-      for (int y = 0; y < 10; y++) //y position
+      for (int y = 0; y < mapY; y++) //y position
       {
-        for (int x = 0; x < 10; x++) //x position
+        char[] newTiles = mapData[y].ToCharArray();
+
+        for (int x = 0; x < mapX; x++) //x position
         {
-          PlaceTile(x,y,worldStart);
+
+          PlaceTile(newTiles[x].ToString(),x,y,worldStart);
         }
       }
     }
 
     //Function that places each tile at position x,y
-    private void PlaceTile(int x, int y, Vector3 worldStart)
+    private void PlaceTile(string tileType, int x, int y, Vector3 worldStart)
     {
+      int tileIndex = int.Parse(tileType);
+
       //Create a new tile
-      GameObject newTile = Instantiate(tilePrefabs[0]);
+      GameObject newTile = Instantiate(tilePrefabs[tileIndex]);
 
       //Sets the position of the new tile
       newTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0);
