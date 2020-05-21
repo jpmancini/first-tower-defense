@@ -12,6 +12,16 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private CameraMovement cameraMovement;
 
+    //the point location for the blue and red portals
+    private Point blueSpawn, redSpawn;
+
+    //prefabs for the blue and red portals
+    [SerializeField]
+    private GameObject bluePortalPrefab, redPortalPrefab;
+
+    //creating the tiles dicitonary
+    public Dictionary<Point, TileScript> Tiles { get; set; }
+
     //Makes TileSize accessable from anywhere
     public float TileSize
     {
@@ -39,6 +49,8 @@ public class LevelManager : MonoBehaviour
     //fucntion uses the array from ReadLevelText to create the level
     private void CreateLevel()
     {
+      //creates a new tiles Dictionary
+      Tiles = new Dictionary<Point, TileScript>();
 
       string[] mapData = ReadLevelText();
 
@@ -55,25 +67,32 @@ public class LevelManager : MonoBehaviour
 
         for (int x = 0; x < mapX; x++) //x position
         {
-
-          maxTile = PlaceTile(newTiles[x].ToString(),x,y,worldStart);
+          //Places tile in the world
+          PlaceTile(newTiles[x].ToString(),x,y,worldStart);
         }
       }
 
+      //creates the maxTile using the tiles dictionary
+      maxTile = Tiles[new Point(mapX-1, mapY-1)].transform.position;
+
+      //sets the camera limits to the max tile position
       cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
+
+      SpawnPortals();
     }
 
     //Function that places each tile at position x,y
-    private Vector3 PlaceTile(string tileType, int x, int y, Vector3 worldStart)
+    private void  PlaceTile(string tileType, int x, int y, Vector3 worldStart)
     {
       int tileIndex = int.Parse(tileType);
 
       //Create a new tile
-      GameObject newTile = Instantiate(tilePrefabs[tileIndex]);
+      TileScript newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
 
-      //Sets the position of the new tile
-      newTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0);
-      return newTile.transform.position;
+      //Sets the world position of the new tileand creates a new point for the created tile
+      newTile.Setup(new Point(x,y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0));
+
+      Tiles.Add(new Point(x,y), newTile);
     }
 
     //Reads Level.txt to generate a string that will be put into the mapData variable
@@ -84,6 +103,21 @@ public class LevelManager : MonoBehaviour
       string data = bindData.text.Replace(Environment.NewLine, string.Empty);
 
       return data.Split('-');
+    }
+
+    //spawns the portals into the game
+    private void SpawnPortals()
+    {
+      //the point position of the blue portal
+      blueSpawn = new Point(0, 1);
+
+      //idk what the quaternion part is either
+      Instantiate(bluePortalPrefab, Tiles[blueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+
+      redSpawn = new Point(14, 8);
+
+      //copy pasted from above
+      Instantiate(redPortalPrefab, Tiles[redSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 
 }
