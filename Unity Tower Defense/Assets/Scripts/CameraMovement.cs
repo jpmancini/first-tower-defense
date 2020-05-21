@@ -16,6 +16,7 @@ public class CameraMovement : MonoBehaviour
         GetInput();
     }
 
+    //gets the wasd inputs and uses them to move the camera
     private void GetInput()
     {
       if (Input.GetKey(KeyCode.W))
@@ -39,6 +40,7 @@ public class CameraMovement : MonoBehaviour
 
     }
 
+    //sets the limits for camera movement
     public void SetLimits(Vector3 maxTile)
     {
       Vector3 wp = Camera.main.ViewportToWorldPoint(new Vector3(1, 0));

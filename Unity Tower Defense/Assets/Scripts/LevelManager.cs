@@ -30,6 +30,13 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    //used to test point struct
+    public void TestValue(Point p)
+    {
+      Debug.Log("Changing value");
+    }
+
+    //fucntion uses the array from ReadLevelText to create the level
     private void CreateLevel()
     {
 
