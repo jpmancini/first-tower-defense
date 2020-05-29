@@ -25,13 +25,13 @@ public class LevelManager : MonoBehaviour
     //Makes TileSize accessable from anywhere
     public float TileSize
     {
-      get { return  tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
+        get { return  tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-      CreateLevel();
+        CreateLevel();
     }
 
     // Update is called once per frame
@@ -43,82 +43,82 @@ public class LevelManager : MonoBehaviour
     //used to test point struct
     public void TestValue(Point p)
     {
-      Debug.Log("Changing value");
+        Debug.Log("Changing value");
     }
 
     //fucntion uses the array from ReadLevelText to create the level
     private void CreateLevel()
     {
-      //creates a new tiles Dictionary
-      Tiles = new Dictionary<Point, TileScript>();
+        //creates a new tiles Dictionary
+        Tiles = new Dictionary<Point, TileScript>();
 
-      string[] mapData = ReadLevelText();
+        string[] mapData = ReadLevelText();
 
-      int mapX = mapData[0].ToCharArray().Length;
-      int mapY = mapData.Length;
+        int mapX = mapData[0].ToCharArray().Length;
+        int mapY = mapData.Length;
 
-      Vector3 maxTile = Vector3.zero;
+        Vector3 maxTile = Vector3.zero;
 
-      Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
+        Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
 
-      for (int y = 0; y < mapY; y++) //y position
-      {
-        char[] newTiles = mapData[y].ToCharArray();
-
-        for (int x = 0; x < mapX; x++) //x position
+        for (int y = 0; y < mapY; y++) //y position
         {
-          //Places tile in the world
-          PlaceTile(newTiles[x].ToString(),x,y,worldStart);
+            char[] newTiles = mapData[y].ToCharArray();
+
+            for (int x = 0; x < mapX; x++) //x position
+            {
+            //Places tile in the world
+            PlaceTile(newTiles[x].ToString(),x,y,worldStart);
+            }
         }
-      }
 
-      //creates the maxTile using the tiles dictionary
-      maxTile = Tiles[new Point(mapX-1, mapY-1)].transform.position;
+        //creates the maxTile using the tiles dictionary
+        maxTile = Tiles[new Point(mapX-1, mapY-1)].transform.position;
 
-      //sets the camera limits to the max tile position
-      cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
+        //sets the camera limits to the max tile position
+        cameraMovement.SetLimits(new Vector3(maxTile.x + TileSize, maxTile.y - TileSize));
 
-      SpawnPortals();
+        SpawnPortals();
     }
 
     //Function that places each tile at position x,y
     private void  PlaceTile(string tileType, int x, int y, Vector3 worldStart)
     {
-      int tileIndex = int.Parse(tileType);
+        int tileIndex = int.Parse(tileType);
 
-      //Create a new tile
-      TileScript newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
+        //Create a new tile
+        TileScript newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
 
-      //Sets the world position of the new tileand creates a new point for the created tile
-      newTile.Setup(new Point(x,y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0));
+        //Sets the world position of the new tileand creates a new point for the created tile
+        newTile.Setup(new Point(x,y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0));
 
-      Tiles.Add(new Point(x,y), newTile);
+        Tiles.Add(new Point(x,y), newTile);
     }
 
     //Reads Level.txt to generate a string that will be put into the mapData variable
     private string[] ReadLevelText()
     {
-      TextAsset bindData = Resources.Load("Level") as TextAsset;
+        TextAsset bindData = Resources.Load("Level") as TextAsset;
 
-      string data = bindData.text.Replace(Environment.NewLine, string.Empty);
+        string data = bindData.text.Replace(Environment.NewLine, string.Empty);
 
-      return data.Split('-');
+        return data.Split('-');
     }
 
     //spawns the portals into the game
     private void SpawnPortals()
     {
-      //the point position of the blue portal (top left right now)
-      blueSpawn = new Point(0, 0);
+        //the point position of the blue portal (top left right now)
+        blueSpawn = new Point(0, 0);
 
-      //idk what the quaternion part is either
-      Instantiate(bluePortalPrefab, Tiles[blueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        //idk what the quaternion part is either
+        Instantiate(bluePortalPrefab, Tiles[blueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
         
-      //the point position of the red portal bottom left right now)    
-      redSpawn = new Point(14, 9);
+        //the point position of the red portal bottom left right now)    
+        redSpawn = new Point(14, 7);
 
-      //copy pasted from above
-      Instantiate(redPortalPrefab, Tiles[redSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        //copy pasted from above
+        Instantiate(redPortalPrefab, Tiles[redSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 
 }
