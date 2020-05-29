@@ -108,13 +108,14 @@ public class LevelManager : MonoBehaviour
     //spawns the portals into the game
     private void SpawnPortals()
     {
-      //the point position of the blue portal
-      blueSpawn = new Point(0, 1);
+      //the point position of the blue portal (top left right now)
+      blueSpawn = new Point(0, 0);
 
       //idk what the quaternion part is either
       Instantiate(bluePortalPrefab, Tiles[blueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
-
-      redSpawn = new Point(14, 8);
+        
+      //the point position of the red portal bottom left right now)    
+      redSpawn = new Point(14, 9);
 
       //copy pasted from above
       Instantiate(redPortalPrefab, Tiles[redSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
