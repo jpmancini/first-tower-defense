@@ -32,6 +32,8 @@ public class TileScript : MonoBehaviour
         this.GridPosition = gridPos;
         transform.position = worldPos;
 
+
+
         LevelManager.Instance.Tiles.Add(gridPos, this);
     }
 }

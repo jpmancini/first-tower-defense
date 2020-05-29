@@ -92,7 +92,6 @@ public class LevelManager : Singleton<LevelManager>
         //Sets the world position of the new tileand creates a new point for the created tile
         newTile.Setup(new Point(x,y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0));
 
-        Tiles.Add(new Point(x,y), newTile);
     }
 
     //Reads Level.txt to generate a string that will be put into the mapData variable
