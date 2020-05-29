@@ -5,12 +5,17 @@ using System;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    //Creating tile object
+    //serializing  tile object
     [SerializeField]
     private GameObject[] tilePrefabs;
 
+    //serializing camera object
     [SerializeField]
     private CameraMovement cameraMovement;
+
+    //serializing map
+    [SerializeField]
+    private Transform map;
 
     //the point location for the blue and red portals
     private Point blueSpawn, redSpawn;
@@ -90,7 +95,7 @@ public class LevelManager : Singleton<LevelManager>
         TileScript newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
 
         //Sets the world position of the new tileand creates a new point for the created tile
-        newTile.Setup(new Point(x,y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0));
+        newTile.Setup(new Point(x,y), new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0), map);
 
     }
 
