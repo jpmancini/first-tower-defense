@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField]
     private GameObject[] tilePrefabs;
@@ -13,6 +13,9 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField]
     private CameraMovement cameraMovement;
+
+    [SerializeField]
+    private Transform map;
 
     private Point greenSpawn, redSpawn;
 
@@ -46,6 +49,7 @@ public class LevelManager : MonoBehaviour
     private void createLevel()
     {
         Tiles = new Dictionary<Point, TileScript>();
+
         //string to identify which tile to place
         string[] mapData = readLevelText();
 
@@ -79,10 +83,7 @@ public class LevelManager : MonoBehaviour
         TileScript newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
 
         //uses the new tile variable to change the position of the tile
-        newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (tileSize * x), worldStart.y - (tileSize * y), 0));
-
-        //adds tile to Dictionary
-        Tiles.Add(new Point(x, y), newTile);
+        newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (tileSize * x), worldStart.y - (tileSize * y), 0), map);
     }
 
     private string[] readLevelText()
