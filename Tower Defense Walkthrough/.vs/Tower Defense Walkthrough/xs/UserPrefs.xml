@@ -1,20 +1,23 @@
 ﻿<Properties StartupConfiguration="{C8909023-1D09-D78D-BD7C-19CD06AF8644}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SIngleton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Level.txt">
     <Files>
-      <File FileName="Assets/Scripts/LevelManager.cs" Line="85" Column="45" />
-      <File FileName="Assets/Scripts/TileScript.cs" Line="34" Column="40" />
+      <File FileName="Assets/Scripts/LevelManager.cs" Line="49" Column="31" />
+      <File FileName="Assets/Scripts/TileScript.cs" Line="51" Column="96" />
       <File FileName="Assets/Scripts/Point.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/CameraMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SIngleton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SIngleton.cs" Line="15" Column="50" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="7" Column="20" />
+      <File FileName="Assets/Resources/Level.txt" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Tower Defense Walkthrough" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="SIngleton.cs" selected="True" />
+              <Node name="Resources" expanded="True">
+                <Node name="Level.txt" selected="True" />
               </Node>
+              <Node name="Scripts" expanded="True" />
             </Node>
           </Node>
         </State>
