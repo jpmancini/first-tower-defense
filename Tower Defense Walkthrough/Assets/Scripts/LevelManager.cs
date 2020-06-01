@@ -14,6 +14,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private CameraMovement cameraMovement;
 
+    private Point greenSpawn, redSpawn;
+
+    [SerializeField]
+    private GameObject greenPortalPrefab;
+    [SerializeField]
+    private GameObject redPortalPrefab;
+
     public Dictionary<Point, TileScript> Tiles { get; set; }
 
     //size of the tiles
@@ -62,6 +69,8 @@ public class LevelManager : MonoBehaviour
 
         //sets camera limits to max tile position
         cameraMovement.setLimits(new Vector3(maxTile.x + tileSize, maxTile.y - tileSize));
+
+        SpawnPortals();
     }
 
     private void placeTile(string tileType, int x, int y, Vector3 worldStart)
@@ -82,6 +91,17 @@ public class LevelManager : MonoBehaviour
         string data = bindData.text.Replace(Environment.NewLine, string.Empty);
 
         return data.Split('-');
+    }
+
+
+    private void SpawnPortals()
+    {
+        greenSpawn = new Point(0, 0);
+        redSpawn = new Point(10, 6);
+
+        Instantiate(greenPortalPrefab, Tiles[greenSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+
+        Instantiate(redPortalPrefab, Tiles[redSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
     }
 }
 
