@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5367354963298826711}
   - component: {fileID: 5030751410411716631}
+  - component: {fileID: 909964893003660134}
   m_Layer: 0
   m_Name: road_corner3
   m_TagString: Untagged
@@ -81,3 +82,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &909964893003660134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6406931916769330273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec615aee26bc4358aada3f05da0fb04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

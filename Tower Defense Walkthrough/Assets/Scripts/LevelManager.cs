@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] tilePrefabs;
 
+    Vector3 maxTile = Vector3.zero;
+
+    [SerializeField]
+    private CameraMovement cameraMovement;
+
+    public Dictionary<Point, TileScript> Tiles { get; set; }
+
     //size of the tiles
     public float tileSize
     {
         get { return tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
-}
+    }
 
 
     // Start is called before the first frame update
@@ -24,12 +32,13 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     //places a X by Y field of tiles
     private void createLevel()
     {
+        Tiles = new Dictionary<Point, TileScript>();
         //string to identify which tile to place
         string[] mapData = readLevelText();
 
@@ -37,22 +46,34 @@ public class LevelManager : MonoBehaviour
         int mapY = mapData.Length;
 
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
-        for(int y = 0; y < mapY; y++)
+        for (int y = 0; y < mapY; y++)
         {
             char[] newTiles = mapData[y].ToCharArray();
             for (int x = 0; x < mapX; x++)
-            { 
-                placeTile(newTiles[x].ToString(),x, y, worldStart);
-               
+            {
+                //places a tile in the world
+                placeTile(newTiles[x].ToString(), x, y, worldStart);
+
             }
         }
+
+        //stores last tile in map to the maxTile variable
+        maxTile = Tiles[new Point(mapX - 1, mapY - 1)].transform.position;
+
+        //sets camera limits to max tile position
+        cameraMovement.setLimits(new Vector3(maxTile.x + tileSize, maxTile.y - tileSize));
     }
 
-    public void placeTile(string tileType, int x, int y, Vector3 worldStart)
+    private void placeTile(string tileType, int x, int y, Vector3 worldStart)
     {
         int tileIndex = int.Parse(tileType);
-        GameObject newTile = Instantiate(tilePrefabs[tileIndex]);
-        newTile.transform.position = new Vector3(worldStart.x + (tileSize*x), worldStart.y - (tileSize * y), 0);
+        TileScript newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
+
+        //uses the new tile variable to change the position of the tile
+        newTile.Setup(new Point(x, y), new Vector3(worldStart.x + (tileSize * x), worldStart.y - (tileSize * y), 0));
+
+        //adds tile to Dictionary
+        Tiles.Add(new Point(x, y), newTile);
     }
 
     private string[] readLevelText()
