@@ -53,16 +53,16 @@ public class LevelManager : Singleton<LevelManager>
         //string to identify which tile to place
         string[] mapData = readLevelText();
 
-        int mapX = mapData[0].ToCharArray().Length;
-        int mapY = mapData.Length;
+        int mapX = mapData[0].ToCharArray().Length; //length of tile
+        int mapY = mapData.Length; //#of rows to place
 
-        Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
-        for (int y = 0; y < mapY; y++)
+        Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height)); //top left corner of camera view
+        for (int y = 0; y < mapY; y++) //for each row
         {
-            char[] newTiles = mapData[y].ToCharArray();
-            for (int x = 0; x < mapX; x++)
+            char[] newTiles = mapData[y].ToCharArray(); //get each individual tile to place
+            for (int x = 0; x < mapX; x++)//for each tile
             {
-                //places a tile in the world
+                //place tile in the world
                 placeTile(newTiles[x].ToString(), x, y, worldStart);
 
             }
@@ -88,10 +88,10 @@ public class LevelManager : Singleton<LevelManager>
 
     private string[] readLevelText()
     {
-        TextAsset bindData = Resources.Load("Level") as TextAsset;
-        string data = bindData.text.Replace(Environment.NewLine, string.Empty);
+        TextAsset bindData = Resources.Load("Level") as TextAsset; //load in the file
+        string data = bindData.text.Replace(Environment.NewLine, string.Empty); //strip newlines
 
-        return data.Split('-');
+        return data.Split('-'); //split into array of strings based on location of '-'
     }
 
 
