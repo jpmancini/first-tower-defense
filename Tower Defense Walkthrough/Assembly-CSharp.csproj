@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Point.cs" />
     <Compile Include="Assets\Scripts\SIngleton.cs" />
     <Compile Include="Assets\Scripts\TileScript.cs" />
+    <Compile Include="Assets\Scripts\TowerBtn.cs" />
     <None Include="Assets\Resources\Level.txt" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2019.3.13f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>

@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager> 
 {
-    [SerializeField]
-    private GameObject towerPrefab; //replace later
-
-    public GameObject TowerPrefab
-    {
-        get
-        {
-            return towerPrefab;
-        }
-    }
+    public TowerBtn ClickedBtn { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -25,5 +16,15 @@ public class GameManager : Singleton<GameManager>
     void Update()
     {
         
+    }
+
+    public void PickTower(TowerBtn towerBtn)
+    {
+        this.ClickedBtn = towerBtn;
+    }
+
+    public void BuyTower()
+    {
+        ClickedBtn = null;
     }
 }
