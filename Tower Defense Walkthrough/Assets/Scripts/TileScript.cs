@@ -59,6 +59,7 @@ public class TileScript : MonoBehaviour
         tower.transform.SetParent(transform);
 
         GameManager.Instance.BuyTower();
+        Hover.Instance.Deactivate();
         
     }
 }
