@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        Currency = 5;
+        Currency = 1000;
     }
 
     // Update is called once per frame
@@ -39,12 +39,20 @@ public class GameManager : Singleton<GameManager>
 
     public void PickTower(TowerBtn towerBtn)
     {
-        this.ClickedBtn = towerBtn;
-        Hover.Instance.Activate(towerBtn.Sprite);
+        if(Currency >= towerBtn.Price)
+        {
+            this.ClickedBtn = towerBtn;
+            Hover.Instance.Activate(towerBtn.Sprite);
+        }
+        
     }
 
     public void BuyTower()
     {
+        if(Currency >= ClickedBtn.Price)
+        {
+            Currency -= ClickedBtn.Price;
+        }
         Hover.Instance.Deactivate();
     }
 
