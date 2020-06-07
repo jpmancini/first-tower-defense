@@ -11,23 +11,25 @@ public class TileScript : MonoBehaviour
 
     public bool IsEmpty { get; private set; }
 
-
-    private SpriteRenderer spriteRenderer;
-
     public Point GridPosition { get; private set; }
 
     public Vector2 WorldPosition
     {
         get
         {
-            return new Vector2(transform.position.x + GetComponent<SpriteRenderer>().bounds.size.x / 2, transform.position.y - (GetComponent<SpriteRenderer>().bounds.size.y/2));
+            return new Vector2(transform.position.x + GetComponent<SpriteRenderer>().bounds.size.x / 2, transform.position.y - (GetComponent<SpriteRenderer>().bounds.size.y / 2));
         }
 
     }
+
+    public SpriteRenderer SpriteRenderer { get; set; }
+
+    public bool Debugging { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -53,11 +55,11 @@ public class TileScript : MonoBehaviour
     
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedBtn != null)
         {
-            if (IsEmpty)
+            if (IsEmpty && !Debugging)
             {
                 ColorTile(emptyColor);
             }
-            if (!IsEmpty)
+            if (!IsEmpty && !Debugging)
             {
                 ColorTile(fullColor);
             }
@@ -70,7 +72,11 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseExit()
     {
-        ColorTile(Color.white);
+        if (!Debugging)
+        {
+            ColorTile(Color.white);
+        }
+        
     }
 
     private void PlaceTower()
@@ -89,6 +95,6 @@ public class TileScript : MonoBehaviour
 
     private void ColorTile(Color newColor)
     {
-        spriteRenderer.color = newColor;
+        SpriteRenderer.color = newColor;
     }
 }

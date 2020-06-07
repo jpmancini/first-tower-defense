@@ -32,6 +32,8 @@ public class LevelManager : Singleton<LevelManager>
         get { return tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
     }
 
+    public IEnumerable<TileScript> Values { get; internal set; }
+
 
     // Start is called before the first frame update
     void Start()
